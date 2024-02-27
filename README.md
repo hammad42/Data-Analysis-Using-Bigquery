@@ -48,7 +48,7 @@ Result [Task 1](GoldenAgeOfVideoGames/csv_data/Task1.csv).
 |New Super Mario Bros. for DS             |DS      |Nintendo        |Nintendo EAD     |30.8      |2006|
 |New Super Mario Bros. Wii for Wii        |Wii     |Nintendo        |Nintendo EAD     |30.3      |2009|
 
-
+Visualization [Task 1] (GoldenAgeOfVideoGames/images/visualizations/Task1.png).
 
 
 ### Task 2: Missing Review Scores
