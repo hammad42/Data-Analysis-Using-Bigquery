@@ -253,14 +253,58 @@ Result [Task 5 data](GoldenAgeOfVideoGames/csv_data/Task5.csv).
 |1995|9.07            |3         |
 |1982|9.0             |1         |
 
-
 Visualization [Task 5 visualization](GoldenAgeOfVideoGames/images/visualizations/Task5.png).
 
 ![Years that dropped off the critics' favorites list](GoldenAgeOfVideoGames/images/visualizations/Task5.png)
 
 ### Task 6: Years Video Game Players Loved
 
+🌟 What the Players Say: Did the '90s Really Rule? 🌟
+
+Our critics seem to think the early 1990s might have been a golden age...  But for true insight, we need the scoop from the experts: the players themselves!
+
+Let's dive into the user_score data.  Could a different era emerge as the champion?  Time to fire up a new query and find out!
+
+user_score favorites list [Task 6 code](GoldenAgeOfVideoGames\src\Task6.sql).
+
+```SQL
+select year, round(avg(user_score),2) as avg_user_score,count(g.game) as num_games from VideoGamesSalesData.game_sales as g
+inner join VideoGamesSalesData.reviews as r
+on g.game=r.game
+group by year
+having count(g.game)>4
+order by avg_user_score desc
+limit 10
+```
+
+Result [Task 6 data](GoldenAgeOfVideoGames/csv_data/Task6.csv).
+
+|year|avg_user_score|num_games|
+|----|--------------|---------|
+|1997|9.5           |8        |
+|1998|9.4           |10       |
+|2010|9.24          |23       |
+|2009|9.18          |20       |
+|2008|9.03          |20       |
+|1996|9.0           |5        |
+|2005|8.95          |13       |
+|2006|8.95          |16       |
+|1999|8.8           |11       |
+|2000|8.8           |8        |
+
+
 ### Task 7:  Years that Both Players and Critics Loved
+
+🕵️‍♀️ The Quest for Legendary Years 🕵️‍♀️
+
+We've analyzed critic scores and player opinions – the results are in!  Now, the exciting question: did any years earn high praise from both critics and gamers?  Those could be the true legends of the video game world!
+
+Let's cross-reference our findings.  Recall that the top_critic_years_more_than_four_games table holds the champions according to the critics...
 
 ### Task 8: Sales in the Best Video Game Years
 
+🤑 Did the Cash Registers Ring? 🤑
+
+We've uncovered three years that ignited the passion of both players and critics.  But in the game industry, passion isn't the only metric that matters.  Did those years also translate into blockbuster sales?
+
+Time to investigate!  We'll whip up a clever query without relying on a pre-saved table.   Get those subquery skills ready –  this is how the pros do it when direct database modification isn't possible!
