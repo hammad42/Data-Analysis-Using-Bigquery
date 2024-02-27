@@ -27,9 +27,11 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 Let's begin by looking at some of the top selling video games of all time!
 The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql).
 
-```select * from VideoGamesSalesData.game_sales
+```
+select * from VideoGamesSalesData.game_sales
 order by games_sold desc
-limit 10;```
+limit 10;
+```
 
 Result [Task 1](GoldenAgeOfVideoGames\csv data\Task1.csv).
 
