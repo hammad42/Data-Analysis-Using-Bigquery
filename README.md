@@ -96,6 +96,8 @@ order by avg_critic_score desc
 limit 10
 ```
 
+Result [Task 3 data](GoldenAgeOfVideoGames/csv_data/Task3.csv).
+
 |year                                     |avg_critic_score|
 |-----------------------------------------|----------------|
 |1990                                     |9.8             |
@@ -109,13 +111,51 @@ limit 10
 |2002                                     |8.99            |
 |1999                                     |8.93            |
 
-Result [Task 3 data](GoldenAgeOfVideoGames/csv_data/Task3.csv).
 
 Visualization [Task 3 visualization](GoldenAgeOfVideoGames/images/visualizations/Task3.png).
 
 ![Ten Best-Selling Video Games according to critics score](GoldenAgeOfVideoGames/images/visualizations/Task3.png)
 
 ### Task 4: Was 1982 Really That Great?
+
+🕵️‍♀️ Case of the Curious Critic Scores 🕵️‍♀️
+
+Okay, our critic reviews suggest the golden age of video games stretches from 1982 all the way to 2020.  That's a HUGE range!
+
+Hold on a second... those avg_critic_score values seem a little too perfect.  1982's score looks especially suspicious. Could it be that our dataset is missing some key releases from certain years?
+
+Time to dig deeper! Let's refine our query and see if 1982 really deserves its top-ranking status.
+
+The SQL code used for Top ten games  according to critics choice [Task 4 code](GoldenAgeOfVideoGames\src\Task4.sql).
+
+```SQL
+select year,count(g.game) as num_games,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+having count(g.game)>4
+order by avg_critic_score desc
+limit 10
+```
+
+Result [Task 4 data](GoldenAgeOfVideoGames/csv_data/Task4.csv).
+
+|year                                     |num_games|avg_critic_score|
+|-----------------------------------------|---------|----------------|
+|1998                                     |10       |9.32            |
+|2004                                     |11       |9.03            |
+|2002                                     |9        |8.99            |
+|1999                                     |11       |8.93            |
+|2001                                     |13       |8.82            |
+|2011                                     |26       |8.76            |
+|2016                                     |13       |8.67            |
+|2013                                     |18       |8.66            |
+|2008                                     |20       |8.63            |
+|2012                                     |12       |8.62            |
+
+Visualization [Task 4 visualization](GoldenAgeOfVideoGames/images/visualizations/Task4.png).
+
+![Ten Best-Selling Video Games according to critics score and game release greater than 4 per year](GoldenAgeOfVideoGames/images/visualizations/Task4.png)
 
 ### Task 5: Years that Dropped Off the Critics' Favorites List 
 
