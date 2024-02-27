@@ -33,7 +33,7 @@ order by games_sold desc
 limit 10;
 ```
 
-Result [Task 1](GoldenAgeOfVideoGames\csv data\Task1.csv).
+Result [Task 1](GoldenAgeOfVideoGames/csv_data/Task1.csv).
 
 |game                                     |platform|publisher       |developer        |games_sold|year|
 |-----------------------------------------|--------|----------------|-----------------|----------|----|
