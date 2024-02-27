@@ -16,11 +16,11 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 
 #### game_sales
 
-![game_sales](GoldenAgeOfVideoGames\images\schema\game_sales_schema.png)
+![game_sales](GoldenAgeOfVideoGames/images/schema/game_sales_schema.png)
 
 #### reviews
 
-![reviews](GoldenAgeOfVideoGames\images\schema\reviews_schema.png)
+![reviews](GoldenAgeOfVideoGames/images/schema/reviews_schema.png)
 
 ### Task 1: The Ten Best-Selling Video Games
 
