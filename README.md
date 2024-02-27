@@ -159,6 +159,106 @@ Visualization [Task 4 visualization](GoldenAgeOfVideoGames/images/visualizations
 
 ### Task 5: Years that Dropped Off the Critics' Favorites List 
 
+🌟 The Hunt for Hidden Gems 🌟
+
+Alright, that num_games column looks much more convincing! Now we're confident our top critic years list truly showcases periods with multiple fantastic releases, not just random hits.
+
+But wait! Which years narrowly missed the cut due to a lack of reviews?  Let's uncover those hidden gems.  Someday, we might just find enough reviews to prove they deserved a spot on the list! 🕵️‍♀️
+
+Get those Set Theory Brains Ready  🧠
+
+We've got the results of our past queries neatly stored in tables. Time to put those set theory skills to work!
+
+
+<h3 id="top_critic_years"><code>top_critic_years</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">column</th>
+<th>type</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"><code>year</code></td>
+<td>int</td>
+<td>Year of video game release</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>avg_critic_score</code></td>
+<td>float</td>
+<td>Average of all critic scores for games released in that year</td>
+</tr>
+</tbody>
+</table>
+<h3 id="top_critic_years_more_than_four_games"><code>top_critic_years_more_than_four_games</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">column</th>
+<th>type</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"><code>year</code></td>
+<td>int</td>
+<td>Year of video game release</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>num_games</code></td>
+<td>int</td>
+<td>Count of the number of video games released in that year</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>avg_critic_score</code></td>
+<td>float</td>
+<td>Average of all critic scores for games released in that year</td>
+</tr>
+</tbody>
+</table>
+
+Years that dropped off the critics' favorites list [Task 5 code](GoldenAgeOfVideoGames\src\Task5.sql).
+
+```SQL
+with tmp as (
+select year,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+order by avg_critic_score desc
+limit 10
+)
+select * from tmp
+
+EXCEPT Distinct
+
+select year,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+having count(g.game)>4
+
+order by avg_critic_score desc
+```
+
+Result [Task 5 data](GoldenAgeOfVideoGames/csv_data/Task5.csv).
+
+|year                                     |avg_critic_score|
+|-----------------------------------------|----------------|
+|1990                                     |9.8             |
+|1992                                     |9.67            |
+|2020                                     |9.2             |
+|1993                                     |9.1             |
+|1995                                     |9.07            |
+|1982                                     |9.0             |
+
+Visualization [Task 5 visualization](GoldenAgeOfVideoGames/images/visualizations/Task5.png).
+
+![Years that dropped off the critics' favorites list](GoldenAgeOfVideoGames/images/visualizations/Task5.png)
+
 ### Task 6: Years Video Game Players Loved
 
 ### Task 7:  Years that Both Players and Critics Loved
