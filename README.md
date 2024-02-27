@@ -50,6 +50,8 @@ Result [Task 1](GoldenAgeOfVideoGames/csv_data/Task1.csv).
 
 Visualization [Task 1](GoldenAgeOfVideoGames/images/visualizations/Task1.png).
 
+![Ten Best-Selling Video Games](GoldenAgeOfVideoGames/images/visualizations/Task1.png)
+
 
 ### Task 2: Missing Review Scores
 
