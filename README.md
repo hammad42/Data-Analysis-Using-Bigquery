@@ -25,7 +25,28 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 ### Task 1: The Ten Best-Selling Video Games
 
 Let's begin by looking at some of the top selling video games of all time!
-The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql). 
+The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql).
+
+```select * from VideoGamesSalesData.game_sales
+order by games_sold desc
+limit 10;```
+
+Result [Task 1](GoldenAgeOfVideoGames\csv data\Task1.csv).
+
+|game                                     |platform|publisher       |developer        |games_sold|year|
+|-----------------------------------------|--------|----------------|-----------------|----------|----|
+|Wii Sports for Wii                       |Wii     |Nintendo        |Nintendo EAD     |82.9      |2006|
+|Super Mario Bros. for NES                |NES     |Nintendo        |Nintendo EAD     |40.24     |1985|
+|Counter-Strike: Global Offensive for PC  |PC      |Valve           |Valve Corporation|40.0      |2012|
+|Mario Kart Wii for Wii                   |Wii     |Nintendo        |Nintendo EAD     |37.32     |2008|
+|PLAYERUNKNOWN'S BATTLEGROUNDS for PC     |PC      |PUBG Corporation|PUBG Corporation |36.6      |2017|
+|Minecraft for PC                         |PC      |Mojang          |Mojang AB        |33.15     |2010|
+|Wii Sports Resort for Wii                |Wii     |Nintendo        |Nintendo EAD     |33.13     |2009|
+|Pokemon Red / Green / Blue Version for GB|GB      |Nintendo        |Game Freak       |31.38     |1998|
+|New Super Mario Bros. for DS             |DS      |Nintendo        |Nintendo EAD     |30.8      |2006|
+|New Super Mario Bros. Wii for Wii        |Wii     |Nintendo        |Nintendo EAD     |30.3      |2009|
+
+
 
 
 ### Task 2: Missing Review Scores
