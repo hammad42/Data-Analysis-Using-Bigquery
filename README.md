@@ -12,7 +12,7 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 ### Dataset Description
 #### game_sales
 ![game_sales](Golden Age Of Video Games/game_sales_schema.png)
-#### reiews
+#### reviews
 ![reviews](Golden Age Of Video Games/reviews_schema.png)
 
 
