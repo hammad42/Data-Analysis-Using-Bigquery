@@ -24,9 +24,8 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 
 ### Task 1: The Ten Best-Selling Video Games
 
-    Let's begin by looking at some of the top selling video games of all time!
-
-    The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql). 
+Let's begin by looking at some of the top selling video games of all time!
+The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql). 
 
 
 ### Task 2: Missing Review Scores
