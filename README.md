@@ -301,10 +301,138 @@ We've analyzed critic scores and player opinions – the results are in!  Now, t
 
 Let's cross-reference our findings.  Recall that the top_critic_years_more_than_four_games table holds the champions according to the critics...
 
+
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">column</th>
+<th>type</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"><code>year</code></td>
+<td>int</td>
+<td>Year of video game release</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>num_games</code></td>
+<td>int</td>
+<td>Count of the number of video games released in that year</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>avg_critic_score</code></td>
+<td>float</td>
+<td>Average of all critic scores for games released in that year</td>
+</tr>
+</tbody>
+</table>
+<p>We've also saved the results of our top user years query from the previous task into a table:</p>
+<h3 id="top_user_years_more_than_four_games"><code>top_user_years_more_than_four_games</code></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">column</th>
+<th>type</th>
+<th>meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;"><code>year</code></td>
+<td>int</td>
+<td>Year of video game release</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>num_games</code></td>
+<td>int</td>
+<td>Count of the number of video games released in that year</td>
+</tr>
+<tr>
+<td style="text-align:left;"><code>avg_user_score</code></td>
+<td>float</td>
+<td>Average of all user scores for games released in that year</td>
+</tr>
+</tbody>
+</table>
+
+user_score and critics favorites list [Task 7 code](GoldenAgeOfVideoGames\src\Task7.sql).
+
+```SQL
+with critic as(
+select year,count(g.game) as num_games,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+having count(g.game)>4
+order by avg_critic_score desc
+limit 10),
+user_score as
+(select year,count(ga.game) as num_games, round(avg(user_score),2) as avg_user_score from VideoGamesSalesData.game_sales as ga
+inner join VideoGamesSalesData.reviews as rv
+on ga.game=rv.game
+group by year
+having count(ga.game)>4
+order by avg_user_score desc
+limit 10
+)
+select year from critic
+
+intersect Distinct
+select year from user_score
+order by year 
+```
+
+Result [Task 7 data](GoldenAgeOfVideoGames/csv_data/Task7.csv).
+
+|year|
+|----|
+|1998|
+|1999|
+
 ### Task 8: Sales in the Best Video Game Years
 
 🤑 Did the Cash Registers Ring? 🤑
 
-We've uncovered three years that ignited the passion of both players and critics.  But in the game industry, passion isn't the only metric that matters.  Did those years also translate into blockbuster sales?
+We've uncovered two years that ignited the passion of both players and critics.  But in the game industry, passion isn't the only metric that matters.  Did those years also translate into blockbuster sales?
 
 Time to investigate!  We'll whip up a clever query without relying on a pre-saved table.   Get those subquery skills ready –  this is how the pros do it when direct database modification isn't possible!
+
+Total sales in peek years [Task 8 code](GoldenAgeOfVideoGames\src\Task8.sql).
+
+```SQL
+select year,sum(games_sold)as total_games_sold from VideoGamesSalesData.game_sales
+where year in (
+with critic as(
+select year,count(g.game) as num_games,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+having count(g.game)>4
+order by avg_critic_score desc
+limit 10),
+user_score as
+(select year,count(g.game) as num_games, round(avg(user_score),2) as avg_user_score from VideoGamesSalesData.game_sales as g
+inner join VideoGamesSalesData.reviews as r
+on g.game=r.game
+group by year
+having count(year)>4
+order by avg_user_score desc
+limit 10
+)
+select year from critic
+intersect Distinct
+select year from user_score
+order by year 
+)
+group by year
+order by 2 desc
+```
+
+Result [Task 8 data](GoldenAgeOfVideoGames/csv_data/Task8.csv).
+
+|year|total_games_sold  |
+|----|------------------|
+|1998|101.51999999999998|
+|1999|74.9              |
