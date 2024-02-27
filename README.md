@@ -77,6 +77,44 @@ Result
 
 ### Task 3:  Years that Video Game Critics Loved
 
+🔍 Missing Reviews: Nothing to Worry About (for now!)
+
+It looks like a tiny bit under ten percent of the games in our game_sales table are missing review data.  That's small enough to keep exploring, but let's file it away in our minds as we analyze those fancy query results later!
+
+🌟 Critics' Choice: Finding the Golden Years of Gaming 🌟
+
+There are tons of ways to figure out the best years in video game history!  Let's dive into what the critics have to say first.
+
+The SQL code used for Top ten games according to critics choice [Task 3 code](GoldenAgeOfVideoGames\src\Task3.sql).
+
+```SQL
+select year,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+inner join VideoGamesSalesData.game_sales as g
+on g.game=r.game
+group by year
+order by avg_critic_score desc
+limit 10
+```
+
+|year                                     |avg_critic_score|
+|-----------------------------------------|----------------|
+|1990                                     |9.8             |
+|1992                                     |9.67            |
+|1998                                     |9.32            |
+|2020                                     |9.2             |
+|1993                                     |9.1             |
+|1995                                     |9.07            |
+|2004                                     |9.03            |
+|1982                                     |9.0             |
+|2002                                     |8.99            |
+|1999                                     |8.93            |
+
+Result [Task 3 data](GoldenAgeOfVideoGames/csv_data/Task3.csv).
+
+Visualization [Task 3 visualization](GoldenAgeOfVideoGames/images/visualizations/Task3.png).
+
+![Ten Best-Selling Video Games according to critics score](GoldenAgeOfVideoGames/images/visualizations/Task3.png)
+
 ### Task 4: Was 1982 Really That Great?
 
 ### Task 5: Years that Dropped Off the Critics' Favorites List 
