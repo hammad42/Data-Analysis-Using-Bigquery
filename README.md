@@ -224,7 +224,7 @@ Years that dropped off the critics' favorites list [Task 5 code](GoldenAgeOfVide
 
 ```SQL
 with tmp as (
-select year,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+select year,round(avg(critic_score),2)as avg_critic_score,count(g.game) as total_game from VideoGamesSalesData.reviews as r
 inner join VideoGamesSalesData.game_sales as g
 on g.game=r.game
 group by year
@@ -235,25 +235,24 @@ select * from tmp
 
 EXCEPT Distinct
 
-select year,round(avg(critic_score),2)as avg_critic_score from VideoGamesSalesData.reviews as r
+select year,round(avg(critic_score),2)as avg_critic_score,count(g.game) as total_game from VideoGamesSalesData.reviews as r
 inner join VideoGamesSalesData.game_sales as g
 on g.game=r.game
 group by year
 having count(g.game)>4
-
-order by avg_critic_score desc
 ```
 
 Result [Task 5 data](GoldenAgeOfVideoGames/csv_data/Task5.csv).
 
-|year                                     |avg_critic_score|
-|-----------------------------------------|----------------|
-|1990                                     |9.8             |
-|1992                                     |9.67            |
-|2020                                     |9.2             |
-|1993                                     |9.1             |
-|1995                                     |9.07            |
-|1982                                     |9.0             |
+|year|avg_critic_score|total_game|
+|----|----------------|----------|
+|1990|9.8             |1         |
+|1992|9.67            |3         |
+|2020|9.2             |2         |
+|1993|9.1             |2         |
+|1995|9.07            |3         |
+|1982|9.0             |1         |
+
 
 Visualization [Task 5 visualization](GoldenAgeOfVideoGames/images/visualizations/Task5.png).
 
