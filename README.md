@@ -301,7 +301,6 @@ We've analyzed critic scores and player opinions – the results are in!  Now, t
 
 Let's cross-reference our findings.  Recall that the top_critic_years_more_than_four_games table holds the champions according to the critics...
 
-
 <table>
 <thead>
 <tr>
@@ -436,3 +435,24 @@ Result [Task 8 data](GoldenAgeOfVideoGames/csv_data/Task8.csv).
 |----|------------------|
 |1998|101.51999999999998|
 |1999|74.9              |
+
+
+### Task 9: Best games in each year
+
+🏆 Leaderboard Legends: Unveiling the Top-Selling Games 🏆
+
+Get ready to analyze the sales data and discover which games dominated the market each year! Let's see who crushed the competition and made it to the top of the sales leaderboards.
+
+Best games in each year [Task 9 code](GoldenAgeOfVideoGames\src\Task9.sql).
+
+```SQL
+SELECT game,year,
+games_sold,
+rank() over(partition by year order by games_sold desc) as rank
+
+ FROM `playground-s-11-8f4cb28f.VideoGamesSalesData.game_sales` 
+
+```
+
+Result [Task 9 data](GoldenAgeOfVideoGames/csv_data/Task9.csv).
+
