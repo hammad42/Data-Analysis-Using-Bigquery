@@ -25,15 +25,15 @@ Our database holds two key tables (we've used a sample of 400 rows for this proj
 ### Task 1: The Ten Best-Selling Video Games
 
 Let's begin by looking at some of the top selling video games of all time!
-The SQL code used for top ten Best-Selling Video Games [Task 1](GoldenAgeOfVideoGames/src/Task1.sql).
+The SQL code used for top ten Best-Selling Video Games [Task 1 code](GoldenAgeOfVideoGames/src/Task1.sql).
 
-```
+```SQL
 select * from VideoGamesSalesData.game_sales
 order by games_sold desc
 limit 10;
 ```
 
-Result [Task 1](GoldenAgeOfVideoGames/csv_data/Task1.csv).
+Result [Task 1 data](GoldenAgeOfVideoGames/csv_data/Task1.csv).
 
 |game                                     |platform|publisher       |developer        |games_sold|year|
 |-----------------------------------------|--------|----------------|-----------------|----------|----|
@@ -48,12 +48,32 @@ Result [Task 1](GoldenAgeOfVideoGames/csv_data/Task1.csv).
 |New Super Mario Bros. for DS             |DS      |Nintendo        |Nintendo EAD     |30.8      |2006|
 |New Super Mario Bros. Wii for Wii        |Wii     |Nintendo        |Nintendo EAD     |30.3      |2009|
 
-Visualization [Task 1](GoldenAgeOfVideoGames/images/visualizations/Task1.png).
+Visualization [Task 1 visualization](GoldenAgeOfVideoGames/images/visualizations/Task1.png).
 
 ![Ten Best-Selling Video Games](GoldenAgeOfVideoGames/images/visualizations/Task1.png)
 
 
 ### Task 2: Missing Review Scores
+
+Wow, the best-selling video games were released between 1985 to 2017! That's quite a range; we'll have to use data from the reviews table to gain more insight on the best years for video games.
+
+First, it's important to explore the limitations of our database. One big shortcoming is that there is not any reviews data for some of the games on the game_sales table.
+
+The SQL code used for missing reviews [Task 2 code](GoldenAgeOfVideoGames/src/Task1.sql).
+
+```SQL
+SELECT COUNT(g.game)as MissingReviews
+FROM VideoGamesSalesData.game_sales g
+left JOIN VideoGamesSalesData.reviews r
+ON g.game = r.game
+WHERE critic_score IS NULL AND user_score IS NULL;
+```
+
+Result
+
+|MissingReviews                           |
+|-----------------------------------------|
+|31                                       |
 
 ### Task 3:  Years that Video Game Critics Loved
 
